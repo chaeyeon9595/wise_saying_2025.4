@@ -1,8 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class App {
 
@@ -18,7 +16,6 @@ public class App {
         System.out.println("== motivation 앱 실행 == ");
 
         int lastId = 1;
-        int listCount = 0;
         List<WiseSaying> wiseSayingList = new ArrayList<>(); //WiseSaying a = new WiseSaying(); 에서 List로 받기...
 
         while(true){
@@ -39,13 +36,26 @@ public class App {
 
 
                 lastId++;
-                listCount++;
+
 
 
             }
             else if(cmd.equals("list")){
-                System.out.printf("등록된 명언 수 : %d\n", listCount);
 
+                if(wiseSayingList.size() == 0){
+                    System.out.println("등록된 명언이 없습니다."); //등록된 명언이 없다? 사이즈 체크
+                }
+                else {
+                    System.out.println("번호    /    인물    /    명언");
+                   // System.out.printf("%d     %s    %s", wiseSayingList.get(0).getId(), wiseSayingList.get(0).getPerson()); -> 이렇게는 0,1,2,3 ... 계속 가야함..
+                    System.out.println("=" .repeat(30));
+                    Collections.reverse(wiseSayingList);
+                    //순서 거꾸로 뒤집어주기
+
+                    for(WiseSaying temp : wiseSayingList){
+                        System.out.printf("%d         %s      %s\n", temp.getId(), temp.getPerson(), temp.getContent());
+                    }
+                }
             }
 
             else if(cmd.equals("exit")){ //equals로 내용비교. 그냥 == 으로 비교하면 주소값을 비교하는 것!!
