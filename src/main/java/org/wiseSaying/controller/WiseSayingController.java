@@ -1,3 +1,4 @@
+
 package org.wiseSaying.controller;
 
 import org.project.Container;
@@ -39,5 +40,9 @@ public class WiseSayingController {
             }
 
         }
+    }
+
+    public void remove(){
+
     }
 }
