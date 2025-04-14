@@ -1,12 +1,7 @@
-
 package org.project;
 
 import org.system.controller.SystemController;
 import org.wiseSaying.controller.WiseSayingController;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class App {
 
@@ -18,40 +13,31 @@ public class App {
         WiseSayingController wiseSayingController = new WiseSayingController();
 
         System.out.println("== motivation 앱 실행 == ");
-        while (true) {
+        byte system_status = 1;
+        while (system_status == 1) {
             System.out.print("명령어) ");
             String cmd = Container.getScanner().nextLine().trim();
-            if (cmd.startsWith("delete")) {
-                // parsing start
-                String[] cmdBits = cmd.split("\\?", 2);
-                String actionCode = cmdBits[0];
-                Map<String, String> params = new HashMap<>();
+            Rq rq = new Rq(cmd);
 
-                String[] paramBits = cmdBits[1].split("=", 2);
+            switch (rq.getActionCode()) {
 
-                String key = paramBits[0];
-                String value = paramBits[1];
-                params.put(key, value);
-                System.out.println(Arrays.toString(cmdBits));
-                System.out.println("actioncode : " + actionCode);
-                System.out.println("key : " + key);
-                System.out.println("value : " + value);
-                // parsing end
-
-                wiseSayingController.remove();
-
-
-            } else if (cmd.equals("add")) {
-                wiseSayingController.add();
-            } else if (cmd.equals("list")) {
-                wiseSayingController.list();
-            } else if (cmd.equals("exit")) {
-                systemController.exit();
-                break;
-            } else {
-                System.out.println("존재하지 않는 명령어입니다.");
+                case "delete":
+                    wiseSayingController.remove();
+                    break;
+                case "add":
+                    wiseSayingController.add();
+                    break;
+                case "list":
+                    wiseSayingController.list();
+                    break;
+                case "exit":
+                    systemController.exit();
+                    system_status = 0;
+                    break;
+                default:
+                    System.out.println("존재하지 않는 명령어입니다.");
+                    break;
             }
-
         }
     }
 }
