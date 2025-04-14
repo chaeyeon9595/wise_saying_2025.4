@@ -1,3 +1,4 @@
+
 package org.project;
 
 import java.util.HashMap;
@@ -19,6 +20,10 @@ public class Rq {
         }
 
         String[] paramBits = cmdBits[1].split("=", 2);
+
+        if(paramBits.length == 1){
+            return;
+        }
 
         String key = paramBits[0];
         String value = paramBits[1];
